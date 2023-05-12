@@ -19,13 +19,13 @@
   formatted HTML file.
   -->
 <xsl:template match="/pokedex">
-Single type pokemon: <xsl:value-of select="XPATH-QUERY-GOES-HERE" />:
+Single type pokemon: <xsl:value-of select="count(pokemon[type[position()=1] and not(type[position()=2])])" />:
 
-<xsl:apply-templates select="XPATH-QUERY-GOES-HERE" />
+<xsl:apply-templates select="pokemon[type[position()=1] and not(type[position()=2])]" />
 </xsl:template>
 
 <xsl:template match="pokemon">
-    <xsl:value-of select="XPATH-QUERY-GOES-HERE" /> (<xsl:value-of select="XPATH-QUERY-GOES-HERE" />): <xsl:value-of select="XPATH-QUERY-GOES-HERE" /> | <xsl:value-of select="XPATH-QUERY-GOES-HERE" /> |
+    <xsl:value-of select="./name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:value-of select="classification" /> | <xsl:value-of select="type" /> |
 </xsl:template>
 
 <!--
@@ -39,14 +39,14 @@ Single type pokemon: <xsl:value-of select="XPATH-QUERY-GOES-HERE" />:
   <html>
   <body>
   <h2>Single-type Pokemon</h2>
-  Count: <xsl:value-of select="XPATH-QUERY-GOES-HERE" />
+  Count: <xsl:value-of select="count(pokemon[type[position()=1] and not(type[position()=2])])" />
   <table border="1">
     <tr bgcolor="#9acd32">
       <th>Name</th>
       <th>Classification</th>
       <th>Type</th>
     </tr>
-    <xsl:apply-templates select="XPATH-QUERY-GOES-HERE" />
+    <xsl:apply-templates select="pokemon[type[position()=1] and not(type[position()=2])]" />
   </table>
   </body>
   </html>
@@ -57,9 +57,9 @@ Single type pokemon: <xsl:value-of select="XPATH-QUERY-GOES-HERE" />:
 <!--
 <xsl:template match="pokemon">
     <tr>
-      <td><xsl:value-of select="XPATH-QUERY-GOES-HERE" />(<xsl:value-of select="XPATH-QUERY-GOES-HERE" />)</td>
-      <td><xsl:value-of select="XPATH-QUERY-GOES-HERE" /></td>
-      <td><xsl:value-of select="XPATH-QUERY-GOES-HERE" /></td>
+      <td><xsl:value-of select="./name" />(<xsl:value-of select="@pokedexNumber" />)</td>
+      <td><xsl:value-of select="./classification" /></td>
+      <td><xsl:value-of select="type" /></td>
     </tr>
 </xsl:template>
 -->
